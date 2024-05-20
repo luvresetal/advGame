@@ -57,7 +57,7 @@ void AadvGameGameModeBase::BeginPlay()
 	FFileHelper::LoadFileToString(charaCsvData, *charaDir);
 
 	// 行ごとに分ける
-	charaCsvData.ParseIntoArray(row, TEXT("\n"), true);
+	charaCsvData.ParseIntoArray(row, TEXT("\r\n"), true);
 	//UKismetSystemLibrary::PrintString(this, FString::FromInt(row.Num()), true, true, FColor::Cyan, 2.f, TEXT("None"));
 
 	// キャラCSVは1行目をキーにしない(台本CSVのimageをキーにするから)
