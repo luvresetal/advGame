@@ -20,6 +20,9 @@ class ADVGAME_API AadvGameGameModeBase : public AGameModeBase
 	// 開始時の設定
 	void BeginPlay() override;
 
+	// csv読み込み
+	void LoadCsv(TArray<FString>& row, FString fileName);
+
 	// ボタン入力
 	void PressButton();
 

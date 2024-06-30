@@ -12,17 +12,9 @@
 void AadvGameGameModeBase::BeginPlay()
 {
 	// 台本CSVの読み込み
-	// CurrentDirectory取得
-	FString dir = FPaths::ProjectDir();
-	// ファイル名
-	FString scriptDir = dir + "Content\\Script\\script.csv";
-
-	FString scriptCsvData;
-	FFileHelper::LoadFileToString(scriptCsvData, *scriptDir);
-
-	// 行ごとに分ける
 	TArray<FString> row;
-	scriptCsvData.ParseIntoArray(row, TEXT("\n"), true);
+	LoadCsv(row, "script.csv");
+
 	scriptCountMax = row.Num();
 	//UKismetSystemLibrary::PrintString(this, FString::FromInt(row.Num()), true, true, FColor::Cyan, 2.f, TEXT("None"));
 
@@ -46,19 +38,11 @@ void AadvGameGameModeBase::BeginPlay()
 		for (int j = 0; j != element.Num(); j++)
 		{
 			scriptData[scriptKey[j]].Add(element[j]);
-
 		}
 	}
 
 	// キャラCSV、画像の読み込み
-	FString charaDir = dir + "Content\\Script\\chara.csv";
-	FString charaCsvData;
-
-	FFileHelper::LoadFileToString(charaCsvData, *charaDir);
-
-	// 行ごとに分ける
-	charaCsvData.ParseIntoArray(row, TEXT("\r\n"), true);
-	//UKismetSystemLibrary::PrintString(this, FString::FromInt(row.Num()), true, true, FColor::Cyan, 2.f, TEXT("None"));
+	LoadCsv(row, "chara.csv");
 
 	// キャラCSVは1行目をキーにしない(台本CSVのimageをキーにするから)
 
@@ -96,6 +80,19 @@ void AadvGameGameModeBase::BeginPlay()
 	
 	scriptCounter = 0;
 	NextPage(scriptCounter);
+}
+
+// CSV読み込み
+void AadvGameGameModeBase::LoadCsv(TArray<FString>& row, FString fileName)
+{
+	FString dir = FPaths::ProjectDir() + "Content\\Script\\" + fileName;
+	UKismetSystemLibrary::PrintString(this, dir, true, true, FColor::Cyan, 2.f, TEXT("None"));
+	// ファイル名
+	FString csvData;
+	FFileHelper::LoadFileToString(csvData, *dir);
+
+	// 改行コードで区切って配列にする
+	csvData.ParseIntoArray(row, TEXT("\r\n"), true);
 }
 
 // Input設定
