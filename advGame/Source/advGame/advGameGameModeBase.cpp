@@ -11,6 +11,15 @@
 
 void AadvGameGameModeBase::BeginPlay()
 {
+	SetupPlay();
+	
+	scriptCounter = 0;
+	NextPage(scriptCounter);
+}
+
+// ‘O€”õ
+void AadvGameGameModeBase::SetupPlay()
+{
 	// ‘ä–{CSV‚Ì“Ç‚İ‚İ
 	TArray<FString> row;
 	LoadCsv(row, "script.csv");
@@ -77,9 +86,6 @@ void AadvGameGameModeBase::BeginPlay()
 	}
 
 	SetupInput();
-	
-	scriptCounter = 0;
-	NextPage(scriptCounter);
 }
 
 // CSV“Ç‚İ‚İ

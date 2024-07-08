@@ -20,6 +20,9 @@ class ADVGAME_API AadvGameGameModeBase : public AGameModeBase
 	// ŠJn‚Ìİ’è
 	void BeginPlay() override;
 
+	// ‘O€”õ
+	void SetupPlay();
+
 	// csv“Ç‚İ‚İ
 	void LoadCsv(TArray<FString>& row, FString fileName);
 
