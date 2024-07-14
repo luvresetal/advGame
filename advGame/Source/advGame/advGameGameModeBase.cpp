@@ -22,7 +22,7 @@ void AadvGameGameModeBase::SetupPlay()
 {
 	// 台本CSVの読み込み
 	TArray<FString> row;
-	LoadCsv(row, "script.csv");
+	LoadCsv(row, "script2.csv");
 
 	scriptCountMax = row.Num();
 	//UKismetSystemLibrary::PrintString(this, FString::FromInt(row.Num()), true, true, FColor::Cyan, 2.f, TEXT("None"));
@@ -46,7 +46,15 @@ void AadvGameGameModeBase::SetupPlay()
 		// 登録
 		for (int j = 0; j != element.Num(); j++)
 		{
-			scriptData[scriptKey[j]].Add(element[j]);
+			// 空白記号
+			if (element[j].Equals("<BLK>", ESearchCase::CaseSensitive))
+			{
+				scriptData[scriptKey[j]].Add(" ");
+			}
+			else
+			{
+				scriptData[scriptKey[j]].Add(element[j]);
+			}
 		}
 	}
 
@@ -124,11 +132,8 @@ void AadvGameGameModeBase::NextPage(int page)
 	if (page < scriptData[scriptKey[sNo]].Num())
 	{
 		// 名前表示切り替え
-		if (scriptData[scriptKey[sName]][page] != " ")
-		{
-			messageWindow->tName->SetText(FText::FromString(scriptData[scriptKey[sName]][page]));
-			//UKismetSystemLibrary::PrintString(this, scriptData[scriptKey[name]][page], true, true, FColor::Cyan, 2.f, TEXT("None"));
-		}
+		messageWindow->tName->SetText(FText::FromString(scriptData[scriptKey[sName]][page]));
+		//UKismetSystemLibrary::PrintString(this, scriptData[scriptKey[name]][page], true, true, FColor::Cyan, 2.f, TEXT("None"));
 		// テクスチャ切り替え
 		if (scriptData[scriptKey[sImage]][page] != " ")
 		{
