@@ -53,6 +53,9 @@ void AadvGameGameModeBase::SetupPlay()
 			}
 			else
 			{
+				// 改行文字があったら改行コードに変換
+				if (element[j].Find("\\n", ESearchCase::IgnoreCase, ESearchDir::FromStart, 0) != -1)
+					element[j] = element[j].Replace(L"\\n", L"\n", ESearchCase::IgnoreCase);
 				scriptData[scriptKey[j]].Add(element[j]);
 			}
 		}
