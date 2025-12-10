@@ -7,33 +7,36 @@
 #include "messageWindow.h"
 #include "Components/TextBlock.h"
 #include "Components/Image.h"
+#include "loadData.h"
 #include "advGameGameModeBase.generated.h"
 
-/**
- * 
- */
+
+
 UCLASS()
 class ADVGAME_API AadvGameGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
-	// ŠJn‚Ìİ’è
+	// é–‹å§‹æ™‚ã®è¨­å®š
 	void BeginPlay() override;
 
-	// ‘O€”õ
+	// å‰æº–å‚™
 	void SetupPlay();
 
-	// csv“Ç‚İ‚İ
-	void LoadCsv(TArray<FString>& row, FString fileName);
+	// ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	// ƒ{ƒ^ƒ““ü—Í
+	// ãƒœã‚¿ãƒ³å…¥åŠ›
 	void PressButton();
 
-	// ƒy[ƒW‚ß‚­‚è
+	// ãƒšãƒ¼ã‚¸ã‚ãã‚Š
 	void NextPage(int page);
 
+	// 
+	void WaitScript();
+
+
 protected:
-	// Inputİ’è
+	// Inputè¨­å®š
 	void SetupInput();
 
 	UPROPERTY(EditAnywhere, Category = "Class Types")
@@ -42,22 +45,28 @@ protected:
 	UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
 	class UmessageWindow* messageWindow;
 
-	// ‘ä–{ƒf[ƒ^
+	UWorld* World;
+
+	int timerCounter;
+	FTimerHandle handle;
+
+	// å°æœ¬ãƒ‡ãƒ¼ã‚¿
 	TMap<FString, TArray<FString>> scriptData;
 	TArray<FString> scriptKey;
 
-	// ‘ä–{CSV‚ÌƒJƒ‰ƒ€–¼
+	// å°æœ¬CSVã®ã‚«ãƒ©ãƒ å
 	enum scriptName {
 		sNo,
 		sName,
 		sText,
-		sImage,
-		sPos
+		sChara,
+		sPos,
+		sBg
 	};
 
 	TMap<FString, UTexture2D*> charaData;
 	TArray<FString> charaKey;
-	// ƒLƒƒƒ‰CSV‚ÌƒJƒ‰ƒ€–¼
+	// ã‚­ãƒ£ãƒ©CSVã®ã‚«ãƒ©ãƒ å
 	enum charaName {
 		cNo,
 		cName,
@@ -69,4 +78,8 @@ protected:
 
 	int scriptCountMax;
 	int scriptCounter;
+
+	FString nowText;
+
+	loadTest test;
 };

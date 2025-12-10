@@ -20,5 +20,7 @@ public:
 	class UTextBlock* tText;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UImage* iChara;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UImage* iBg;
 	
 };

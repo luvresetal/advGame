@@ -13,21 +13,26 @@ void AadvGameGameModeBase::BeginPlay()
 {
 	SetupPlay();
 	
+	World = GEngine->GameViewport->GetWorld();
+
 	scriptCounter = 0;
 	NextPage(scriptCounter);
 }
 
-// ‘O€”õ
+// å‰æº–å‚™
 void AadvGameGameModeBase::SetupPlay()
 {
-	// ‘ä–{CSV‚Ì“Ç‚İ‚İ
+	UPROPERTY();
+	AloadData* setup = NewObject<AloadData>();
+	// å°æœ¬CSVã®èª­ã¿è¾¼ã¿
 	TArray<FString> row;
-	LoadCsv(row, "script2.csv");
+	//setup->LoadCsv(row, "script2.csv");
+	test.LoadCsv(row, "script2.csv");
 
 	scriptCountMax = row.Num();
 	//UKismetSystemLibrary::PrintString(this, FString::FromInt(row.Num()), true, true, FColor::Cyan, 2.f, TEXT("None"));
 
-	// Å‰‚Ìs‚Ì“à—e‚ğƒL[‚Æ‚·‚é
+	// æœ€åˆã®è¡Œã®å†…å®¹ã‚’ã‚­ãƒ¼ã¨ã™ã‚‹
 	row[0].ParseIntoArray(scriptKey, TEXT(","), true);
 
 	for (int i = 0; i != scriptKey.Num(); i++)
@@ -35,25 +40,25 @@ void AadvGameGameModeBase::SetupPlay()
 		scriptData.Add(scriptKey[i]);
 	}
 
-	//ƒL[ˆÈŠO‚ÌŠe—v‘f‚ğRowData‚ÉƒL[‚ÆŠÖ˜A•t‚¯‚Ä“o˜^
+	//ã‚­ãƒ¼ä»¥å¤–ã®å„è¦ç´ ã‚’RowDataã«ã‚­ãƒ¼ã¨é–¢é€£ä»˜ã‘ã¦ç™»éŒ²
 	TArray<FString> element;
-	// 1s‚¸‚Â“Ç‚İ‚Ş
+	// 1è¡Œãšã¤èª­ã¿è¾¼ã‚€
 	for (int i = 1; i != row.Num(); i++)
 	{
-		// •ª‰ğ
+		// åˆ†è§£
 		row[i].ParseIntoArray(element, TEXT(","), true);
 		//UKismetSystemLibrary::PrintString(this, row[i], true, true, FColor::Cyan, 2.f, TEXT("None"));
-		// “o˜^
+		// ç™»éŒ²
 		for (int j = 0; j != element.Num(); j++)
 		{
-			// ‹ó”’‹L†
-			if (element[j].Equals("<BLK>", ESearchCase::CaseSensitive))
+			// ç©ºç™½è¨˜å·
+			if (element[j].Equals("<NONE>", ESearchCase::CaseSensitive))
 			{
 				scriptData[scriptKey[j]].Add(" ");
 			}
 			else
 			{
-				// ‰üs•¶š‚ª‚ ‚Á‚½‚ç‰üsƒR[ƒh‚É•ÏŠ·
+				// æ”¹è¡Œæ–‡å­—ãŒã‚ã£ãŸã‚‰æ”¹è¡Œã‚³ãƒ¼ãƒ‰ã«å¤‰æ›
 				if (element[j].Find("\\n", ESearchCase::IgnoreCase, ESearchDir::FromStart, 0) != -1)
 					element[j] = element[j].Replace(L"\\n", L"\n", ESearchCase::IgnoreCase);
 				scriptData[scriptKey[j]].Add(element[j]);
@@ -61,21 +66,22 @@ void AadvGameGameModeBase::SetupPlay()
 		}
 	}
 
-	// ƒLƒƒƒ‰CSVA‰æ‘œ‚Ì“Ç‚İ‚İ
-	LoadCsv(row, "chara.csv");
+	// ã‚­ãƒ£ãƒ©CSVã€ç”»åƒã®èª­ã¿è¾¼ã¿
+	//setup->LoadCsv(row, "chara2.csv");
+	test.LoadCsv(row, "script2.csv");
 
-	// ƒLƒƒƒ‰CSV‚Í1s–Ú‚ğƒL[‚É‚µ‚È‚¢(‘ä–{CSV‚Ìimage‚ğƒL[‚É‚·‚é‚©‚ç)
+	// ã‚­ãƒ£ãƒ©CSVã¯1è¡Œç›®ã‚’ã‚­ãƒ¼ã«ã—ãªã„(å°æœ¬CSVã®imageã‚’ã‚­ãƒ¼ã«ã™ã‚‹ã‹ã‚‰)
 
-	//ƒL[ˆÈŠO‚ÌŠe—v‘f‚ğRowData‚ÉƒL[‚ÆŠÖ˜A•t‚¯‚Ä“o˜^
+	//ã‚­ãƒ¼ä»¥å¤–ã®å„è¦ç´ ã‚’RowDataã«ã‚­ãƒ¼ã¨é–¢é€£ä»˜ã‘ã¦ç™»éŒ²
 	FString elementTexAddr;
 	UTexture2D* elementTex;
-	// 1s‚¸‚Â“Ç‚İ‚Ş
+	// 1è¡Œãšã¤èª­ã¿è¾¼ã‚€
 	for (int i = 1; i != row.Num(); i++)
 	{
-		// •ª‰ğ
+		// åˆ†è§£
 		row[i].ParseIntoArray(element, TEXT(","), true);
 		//UKismetSystemLibrary::PrintString(this, row[i], true, true, FColor::Cyan, 2.f, TEXT("None"));
-		// ƒeƒNƒXƒ`ƒƒ‚ğ“Ç‚İ‚ñ‚ÅTMap‚ÉŠi”[
+		// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’èª­ã¿è¾¼ã‚“ã§TMapã«æ ¼ç´
 		FString aaa = element[cTexture];
 		elementTexAddr = TEXT("/Game/assets/") + element[cTexture];
 		elementTex = LoadObject<UTexture2D>(NULL, *elementTexAddr, NULL, LOAD_None, NULL);
@@ -85,7 +91,7 @@ void AadvGameGameModeBase::SetupPlay()
 		}
 	}
 
-	// ƒEƒCƒ“ƒhƒE‚Ìì¬
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
 	if (IsValid(widgetClass))
 	{
 		messageWindow = Cast<UmessageWindow>(CreateWidget(GetWorld(), widgetClass));
@@ -99,49 +105,56 @@ void AadvGameGameModeBase::SetupPlay()
 	SetupInput();
 }
 
-// CSV“Ç‚İ‚İ
-void AadvGameGameModeBase::LoadCsv(TArray<FString>& row, FString fileName)
-{
-	FString dir = FPaths::ProjectDir() + "Content\\Script\\" + fileName;
-	UKismetSystemLibrary::PrintString(this, dir, true, true, FColor::Cyan, 2.f, TEXT("None"));
-	// ƒtƒ@ƒCƒ‹–¼
-	FString csvData;
-	FFileHelper::LoadFileToString(csvData, *dir);
 
-	// ‰üsƒR[ƒh‚Å‹æØ‚Á‚Ä”z—ñ‚É‚·‚é
-	csvData.ParseIntoArray(row, TEXT("\r\n"), true);
-}
-
-// Inputİ’è
+// Inputè¨­å®š
 void AadvGameGameModeBase::SetupInput()
 {
-	// “ü—Í‚ğ—LŒø‚É‚·‚é
+	// å…¥åŠ›ã‚’æœ‰åŠ¹ã«ã™ã‚‹
 	EnableInput(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 
-	// ¶ƒNƒŠƒbƒN
+	// å·¦ã‚¯ãƒªãƒƒã‚¯
 	InputComponent->BindKey(EKeys::LeftMouseButton, IE_Pressed, this, &AadvGameGameModeBase::PressButton);
 }
 
-// ƒL[“ü—Í
+// ã‚­ãƒ¼å…¥åŠ›
 void AadvGameGameModeBase::PressButton()
 {
 	scriptCounter++;
+	timerCounter = 0;
 	NextPage(scriptCounter);
 }
 
-// ƒy[ƒW‚ß‚­‚è
+// ãƒšãƒ¼ã‚¸ã‚ãã‚Š
 void AadvGameGameModeBase::NextPage(int page)
-{	// ƒEƒCƒ“ƒhƒE‚É•¶š‚ğ•\¦
+{	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«æ–‡å­—ã‚’è¡¨ç¤º
 	if (page < scriptData[scriptKey[sNo]].Num())
 	{
-		// –¼‘O•\¦Ø‚è‘Ö‚¦
+		// åå‰è¡¨ç¤ºåˆ‡ã‚Šæ›¿ãˆ
 		messageWindow->tName->SetText(FText::FromString(scriptData[scriptKey[sName]][page]));
-		//UKismetSystemLibrary::PrintString(this, scriptData[scriptKey[name]][page], true, true, FColor::Cyan, 2.f, TEXT("None"));
-		// ƒeƒNƒXƒ`ƒƒØ‚è‘Ö‚¦
-		if (scriptData[scriptKey[sImage]][page] != " ")
+		// ãƒ†ã‚¯ã‚¹ãƒãƒ£åˆ‡ã‚Šæ›¿ãˆ
+		if (scriptData[scriptKey[sChara]][page] != " ")
 		{
-			messageWindow->iChara->SetBrushFromTexture(charaData[scriptData[scriptKey[sImage]][page]]);
+			messageWindow->iChara->SetBrushFromTexture(charaData[scriptData[scriptKey[sChara]][page]]);
 		}
-		messageWindow->tText->SetText(FText::FromString(scriptData[scriptKey[sText]][page]));
+		if (scriptData[scriptKey[sBg]][page] != " ")
+		{
+			//printf(scriptData[scriptKey[sBg]][page]);
+			messageWindow->iBg->SetBrushFromTexture(charaData[scriptData[scriptKey[sBg]][page]]);
+		}
+
+
+		//UE_LOG(LogTemp, Log, TEXT("%s"), *scriptData[scriptKey[sText]][page].Left(10));
+		nowText = scriptData[scriptKey[sText]][page];
+		World->GetTimerManager().SetTimer(handle, this, &AadvGameGameModeBase::WaitScript, 0.008f, true);
+		//UE_LOG(LogTemp, Log, TEXT("%s"), *scriptData[scriptKey[sText]][page].Left(i));
+
+	}
+}
+
+void AadvGameGameModeBase::WaitScript()
+{
+	if (timerCounter <= nowText.Len()) {
+		messageWindow->tText->SetText(FText::FromString(nowText.Left(timerCounter)));
+		timerCounter++;
 	}
 }
