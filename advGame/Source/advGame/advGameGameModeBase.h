@@ -81,5 +81,5 @@ protected:
 
 	FString nowText;
 
-	loadTest test;
+	loadData load;
 };

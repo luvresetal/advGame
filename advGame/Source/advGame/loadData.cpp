@@ -3,15 +3,15 @@
 
 #include "loadData.h"
 
-loadTest::loadTest()
+loadData::loadData()
 {
 }
 
-loadTest::~loadTest()
+loadData::~loadData()
 {
 }
 // CSV読み込み
-void loadTest::LoadCsv(TArray<FString>& row, FString fileName)
+void loadData::LoadCsv(TArray<FString>& row, FString fileName)
 {
 	FString dir = FPaths::ProjectDir() + "Content\\Script\\" + fileName;
 	//UKismetSystemLibrary::PrintString(this, dir, true, true, FColor::Cyan, 2.f, TEXT("None"));

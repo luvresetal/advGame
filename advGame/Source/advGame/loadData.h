@@ -4,31 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
-#include "loadData.generated.h"
+//#include "loadData.generated.h"
 
-/**
- * 
- */
-UCLASS()
 
-class ADVGAME_API AloadData : public AGameStateBase
-{
-	GENERATED_BODY()
 
-public:
-	AloadData();
-	~AloadData();
-
-	// csv�ǂݍ���
-	static void LoadCsv(TArray<FString>& row, FString fileName);
-	
-};
-
-class loadTest
+class loadData
 {
 public:
-	loadTest();
-	~loadTest();
+	loadData();
+	~loadData();
 
 	void LoadCsv(TArray<FString>& row, FString fileName);
 };
