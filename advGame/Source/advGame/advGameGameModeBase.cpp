@@ -22,75 +22,11 @@ void AadvGameGameModeBase::BeginPlay()
 // 前準備
 void AadvGameGameModeBase::SetupPlay()
 {
-	UPROPERTY();
-	//AloadData* setup = NewObject<AloadData>();
 	// 台本CSVの読み込み
-	TArray<FString> rowTxt;
-	//setup->LoadCsv(row, "script2.csv");
-	load.LoadCsv(rowTxt, "script2.csv");
-
-	scriptCountMax = rowTxt.Num();
-	//UKismetSystemLibrary::PrintString(this, FString::FromInt(row.Num()), true, true, FColor::Cyan, 2.f, TEXT("None"));
-
-	// 最初の行の内容をキーとする
-	rowTxt[0].ParseIntoArray(scriptKey, TEXT(","), true);
-
-	for (int i = 0; i != scriptKey.Num(); i++)
-	{
-		scriptData.Add(scriptKey[i]);
-	}
-
-	//キー以外の各要素をRowDataにキーと関連付けて登録
-	TArray<FString> element;
-	// 1行ずつ読み込む
-	for (int i = 1; i != rowTxt.Num(); i++)
-	{
-		// 分解
-		rowTxt[i].ParseIntoArray(element, TEXT(","), true);
-		//UKismetSystemLibrary::PrintString(this, row[i], true, true, FColor::Cyan, 2.f, TEXT("None"));
-		// 登録
-		for (int j = 0; j != element.Num(); j++)
-		{
-			// 空白記号
-			if (element[j].Equals("<NONE>", ESearchCase::CaseSensitive))
-			{
-				scriptData[scriptKey[j]].Add(" ");
-			}
-			else
-			{
-				// 改行文字があったら改行コードに変換
-				if (element[j].Find("\\n", ESearchCase::IgnoreCase, ESearchDir::FromStart, 0) != -1)
-					element[j] = element[j].Replace(L"\\n", L"\n", ESearchCase::IgnoreCase);
-				scriptData[scriptKey[j]].Add(element[j]);
-			}
-		}
-	}
+	load.loadScript(scriptData, scriptKey, "script2.csv");
 
 	// キャラCSV、画像の読み込み
- 	TArray<FString> rowImg;
-	//setup->LoadCsv(row, "chara2.csv");
-	load.LoadCsv(rowImg, "chara2.csv");
-
-	// キャラCSVは1行目をキーにしない(台本CSVのimageをキーにするから)
-
-	//キー以外の各要素をRowDataにキーと関連付けて登録
-	FString elementTexAddr;
-	UTexture2D* elementTex;
-	// 1行ずつ読み込む
-	for (int i = 1; i != rowImg.Num(); i++)
-	{
-		// 分解
-		rowImg[i].ParseIntoArray(element, TEXT(","), true);
-		//UKismetSystemLibrary::PrintString(this, row[i], true, true, FColor::Cyan, 2.f, TEXT("None"));
-		// テクスチャを読み込んでTMapに格納
-		FString aaa = element[cTexture];
-		elementTexAddr = TEXT("/Game/assets/") + element[cTexture];
-		elementTex = LoadObject<UTexture2D>(NULL, *elementTexAddr, NULL, LOAD_None, NULL);
-		charaData.Add(element[cName], elementTex);
-		if (charaData.Add(element[cName], elementTex) == nullptr) {
-			UKismetSystemLibrary::PrintString(this, "Falure....", true, true, FColor::Cyan, 2.f, TEXT("None"));
-		}
-	}
+	load.loadChara(charaData, "chara2.csv");
 
 	// ウインドウの作成
 	if (IsValid(widgetClass))

@@ -13,6 +13,19 @@ class loadData
 public:
 	loadData();
 	~loadData();
+	// 台本データ
+	void loadScript(TMap<FString, TArray<FString>>& scriptData, TArray<FString>& scriptKey, FString fileName);
+	// キャラデータ
+	void loadChara(TMap<FString, UTexture2D*>& charaData, FString fileName);
 
+private:
+	// CSV読み込み
 	void LoadCsv(TArray<FString>& row, FString fileName);
+
+	// キャラCSVのカラム名
+	enum charaName {
+		cNo,
+		cName,
+		cTexture
+	};
 };
