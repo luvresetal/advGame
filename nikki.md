@@ -12,8 +12,7 @@ TwitterID:@luvresetal
 今度はエンディング（仮）のレベルを作成。  
 今度はVisualstudioのプロジェクトが消えてしまう。  
 https://qiita.com/H-Takayama/items/cb422f843cb62bcf05c9  
-こちらのサイトを参考に.slnファイルをメモ帳で開いて、.vcxprojファイルのパスのフォルダを見たら  
-.vcxprojファイルがない。    
+こちらのサイトを参考に.slnファイルをメモ帳で開いて、.vcxprojファイルのパスのフォルダを見たら.vcxprojファイルがない。    
 ファイルパスはIntermediate\ProjectFiles\で、UE側でC++クラスが消えた際に削除してしまっていたものだった。  
 今後、UE側でC++クラスが消えたとき、Intermediateフォルダは消さないほうがいいのかも。  
 （データ、ゴミ箱に残っててよかったーーー）  
