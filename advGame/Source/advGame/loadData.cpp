@@ -83,8 +83,19 @@ void loadData::loadChara(TMap<FString, UTexture2D*>& charaData, FString fileName
 		row[i].ParseIntoArray(element, TEXT(","), true);
 		//UKismetSystemLibrary::PrintString(this, row[i], true, true, FColor::Cyan, 2.f, TEXT("None"));
 		// テクスチャを読み込んでTMapに格納
-		FString aaa = element[cTexture];
-		elementTexAddr = TEXT("/Game/assets/") + element[cTexture];
+
+		// キャラ画像の読み込み
+		if (element[cClassified].Equals("chara", ESearchCase::CaseSensitive))
+		{
+			elementTexAddr = TEXT("/Game/assets/charactor/") + element[cTexture];
+		}
+		// 背景画像の読み込み
+		else if(element[cClassified].Equals("background", ESearchCase::CaseSensitive))
+		{
+			elementTexAddr = TEXT("/Game/assets/backGround/") + element[cTexture];
+		}
+
+		//elementTexAddr = TEXT("/Game/assets/") + element[cTexture];
 		elementTex = LoadObject<UTexture2D>(NULL, *elementTexAddr, NULL, LOAD_None, NULL);
 		charaData.Add(element[cName], elementTex);
 		//if (charaData.Add(element[cName], elementTex) == nullptr) {

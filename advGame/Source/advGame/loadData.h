@@ -22,10 +22,17 @@ private:
 	// CSV読み込み
 	void LoadCsv(TArray<FString>& row, FString fileName);
 
-	// キャラCSVのカラム名
+	// 画像CSVのカラム名
 	enum charaName {
 		cNo,
 		cName,
+		cClassified,
 		cTexture
+	};
+
+	// 画像CSVの分類
+	enum classifiedName{
+		cfChara,			// キャラ立ち絵
+		cfBackground		// 背景
 	};
 };

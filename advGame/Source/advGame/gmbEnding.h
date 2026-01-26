@@ -23,5 +23,9 @@ protected:
 	class UwEnding* wEnding;
 
 	void BeginPlay() override;
+
+	void PressButton();
+
+	TObjectPtr<UWorld> LoadLevel;
 	
 };

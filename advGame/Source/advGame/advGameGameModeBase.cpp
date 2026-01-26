@@ -84,7 +84,11 @@ void AadvGameGameModeBase::NextPage(int page)
 		nowText = scriptData[scriptKey[sText]][page];
 		World->GetTimerManager().SetTimer(handle, this, &AadvGameGameModeBase::WaitScript, 0.008f, true);
 		//UE_LOG(LogTemp, Log, TEXT("%s"), *scriptData[scriptKey[sText]][page].Left(i));
-
+	}
+	else
+	{
+		// 台本が最終行まで行ったのでエンディングに遷移
+		UGameplayStatics::OpenLevel(GetWorld(), FName("ending"));
 	}
 }
 

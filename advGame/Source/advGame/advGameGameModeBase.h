@@ -23,8 +23,6 @@ class ADVGAME_API AadvGameGameModeBase : public AGameModeBase
 	// 前準備
 	void SetupPlay();
 
-	// �{�^������
-
 	// ボタン入力
 	void PressButton();
 

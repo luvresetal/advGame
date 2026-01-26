@@ -22,5 +22,9 @@ protected:
 	class UwTitle* wTitle;
 
 	void BeginPlay() override;
+
+	void PressButton();
+
+	TObjectPtr<UWorld> LoadLevel;
 	
 };
