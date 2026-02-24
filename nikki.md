@@ -7,7 +7,15 @@
 張っているリンクについて  
 もし管理者様などでリンクを掲載しないでほしいなどありましたら、以下に連絡をお願いいたします。直ちに削除いたします。  
 TwitterID:@luvresetal  
-
+  
+2026年2月24日  
+なんとかフェード処理を入れられるようになった。  
+フェードアウト後にレベル移動となると、、、で悩む。  
+https://www.reddit.com/r/unrealengine/comments/ioksh4/how_to_use_uuserwidgetonanimationfinished/?tl=ja
+BindToAnimationFinishedを使ってウィジェットアニメーションの後にレベル移動の処理を実行させる。  
+アニメーションと関数をバインドしたり、デリゲートのやり方に悩んでしまった。  
+コミットしたいけど、なんだかビルドが通らなくなったから日記だけ書いて寝る…。風邪ひいてるし。  
+  
 2026年2月8日  
 ウィジェットブループリントの親クラスを変更する  
 https://massie0414.com/index.php/game_production/unrealengine/9538/  
