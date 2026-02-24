@@ -11,7 +11,7 @@ TwitterID:@luvresetal
 2026年2月24日  
 なんとかフェード処理を入れられるようになった。  
 フェードアウト後にレベル移動となると、、、で悩む。  
-https://www.reddit.com/r/unrealengine/comments/ioksh4/how_to_use_uuserwidgetonanimationfinished/?tl=ja
+https://www.reddit.com/r/unrealengine/comments/ioksh4/how_to_use_uuserwidgetonanimationfinished/?tl=ja  
 BindToAnimationFinishedを使ってウィジェットアニメーションの後にレベル移動の処理を実行させる。  
 アニメーションと関数をバインドしたり、デリゲートのやり方に悩んでしまった。  
 コミットしたいけど、なんだかビルドが通らなくなったから日記だけ書いて寝る…。風邪ひいてるし。  
