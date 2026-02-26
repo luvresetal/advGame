@@ -20,19 +20,32 @@ void AgmbEnding::BeginPlay()
 	}
 
 	// Input設定
-// 入力を有効にする
+	// 入力を有効にする
 	EnableInput(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 
 	// 左クリック
 	InputComponent->BindKey(EKeys::LeftMouseButton, IE_Pressed, this, &AgmbEnding::PressButton);
+
+	wEnding->PlayAnimation(wEnding->fadeIn);
 }
 
 void AgmbEnding::PressButton()
 {
 	// 左クリックでタイトルのレベルへ移動
-	// まずはフェードアウト入れたい
+	// フェードアウトのアニメーションとレベル移動の関数をバインド
+	wEnding->finAnim.BindDynamic(this, &AgmbEnding::ChangeLevel);
+	wEnding->BindToAnimationFinished(wEnding->fadeOut, wEnding->finAnim);
+
+	// アニメーション実行
+	wEnding->PlayAnimation(wEnding->fadeOut);
+
+}
+
+void AgmbEnding::ChangeLevel()
+{
+	// バインド解除
+	wEnding->finAnim.Clear();
 
 	// 遷移するLevelをLoadする
 	UGameplayStatics::OpenLevel(GetWorld(), FName("title"));
-
 }

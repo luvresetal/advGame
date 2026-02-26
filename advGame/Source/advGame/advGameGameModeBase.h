@@ -8,6 +8,7 @@
 #include "Components/TextBlock.h"
 #include "Components/Image.h"
 #include "loadData.h"
+#include "wBlackFade.h"
 #include "advGameGameModeBase.generated.h"
 
 
@@ -40,6 +41,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Class Types")
 	TSubclassOf<UUserWidget> widgetClass;
 
+	// メッセージウィンドウ
 	UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
 	class UmessageWindow* messageWindow;
 

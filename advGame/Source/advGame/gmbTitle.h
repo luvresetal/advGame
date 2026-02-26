@@ -13,6 +13,7 @@ UCLASS()
 class ADVGAME_API AgmbTitle : public AGameModeBase
 {
 	GENERATED_BODY()
+
 protected:
 
 	UPROPERTY(EditAnywhere, Category = "Class Types")
@@ -21,9 +22,15 @@ protected:
 	UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
 	class UwTitle* wTitle;
 
+	// 下準備
 	void BeginPlay() override;
 
+	// 左クリックの処理
 	void PressButton();
+
+	// レベル移動
+	UFUNCTION(BlueprintCallable)
+	void ChangeLevel();
 
 	TObjectPtr<UWorld> LoadLevel;
 	

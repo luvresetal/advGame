@@ -13,5 +13,16 @@ UCLASS()
 class ADVGAME_API UwTitle : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	class UWidgetAnimation* fadeIn = nullptr;
+
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	class UWidgetAnimation* fadeOut = nullptr;
+
+	// フェードアウト後にレベル移動するための処理
+	// デリゲート
+	FWidgetAnimationDynamicEvent finAnim;
 	
 };

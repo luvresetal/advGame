@@ -28,15 +28,17 @@ void AadvGameGameModeBase::SetupPlay()
 	// キャラCSV、画像の読み込み
 	load.loadChara(charaData, "chara2.csv");
 
-	// ウインドウの作成
+	
 	if (IsValid(widgetClass))
 	{
+		// ウインドウの作成
 		messageWindow = Cast<UmessageWindow>(CreateWidget(GetWorld(), widgetClass));
 
 		if (messageWindow != nullptr)
 		{
 			messageWindow->AddToViewport();
 		}
+
 	}
 
 	SetupInput();

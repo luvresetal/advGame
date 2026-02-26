@@ -22,9 +22,15 @@ protected:
 	UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
 	class UwEnding* wEnding;
 
+	// 下準備
 	void BeginPlay() override;
 
+	// 左クリックの処理
 	void PressButton();
+
+	// レベル移動
+	UFUNCTION(BlueprintCallable)
+	void ChangeLevel();
 
 	TObjectPtr<UWorld> LoadLevel;
 	

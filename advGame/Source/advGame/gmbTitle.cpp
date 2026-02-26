@@ -25,14 +25,26 @@ void AgmbTitle::BeginPlay()
 
 	// 左クリック
 	InputComponent->BindKey(EKeys::LeftMouseButton, IE_Pressed, this, &AgmbTitle::PressButton);
+
+	wTitle->PlayAnimation(wTitle->fadeIn);
 }
 
 void AgmbTitle::PressButton()
 {
 	// 左クリックで本編のレベルへ移動
-	// まずはフェードアウト入れたい
+	// フェードアウトのアニメーションとレベル移動の関数をバインド
+	wTitle->finAnim.BindDynamic(this, &AgmbTitle::ChangeLevel);
+	wTitle->BindToAnimationFinished(wTitle->fadeOut, wTitle->finAnim);
+	
+	// アニメーション実行
+	wTitle->PlayAnimation(wTitle->fadeOut);
+}
+
+void AgmbTitle::ChangeLevel()
+{
+	// バインド解除
+	wTitle->finAnim.Clear();
 
 	// 遷移するLevelをLoadする
 	UGameplayStatics::OpenLevel(GetWorld(), FName("adv"));
-
 }
