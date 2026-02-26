@@ -11,7 +11,7 @@ TwitterID:@luvresetal
 2026年2月26日  
 デリゲート関連でビルドエラーが起きてて詰む。  
 UserWidgetを親クラスにしているクラスで宣言しないとダメだった。  
-コンポーネントと同じような感じだろうか。 
+コンポーネントと同じような感じだろうか。  
 【UE4/UE5 C++】デリゲートの使い方まとめ  
 https://dokuro.moe/ue4-cpp-how-to-use-delegate/  
 　　  
