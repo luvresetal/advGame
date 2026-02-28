@@ -11,9 +11,9 @@
 
 void AadvGameGameModeBase::BeginPlay()
 {
-	SetupPlay();
-	
 	World = GEngine->GameViewport->GetWorld();
+
+	SetupPlay();
 
 	scriptCounter = 0;
 	NextPage(scriptCounter);
@@ -37,11 +37,19 @@ void AadvGameGameModeBase::SetupPlay()
 		if (messageWindow != nullptr)
 		{
 			messageWindow->AddToViewport();
+
 		}
 
 	}
+	// フェードインのあとにゲームが始まるようにアニメーションを関数をバインドさせる
+	messageWindow->animEvent.BindDynamic(this, &AadvGameGameModeBase::SetupInput);
+	messageWindow->BindToAnimationFinished(messageWindow->fadeIn, messageWindow->animEvent);
 
-	SetupInput();
+	// フェードイン→Input設定
+	messageWindow->PlayAnimation(messageWindow->fadeIn);
+
+	// フェードイン再生したらバインド解除しておく
+	messageWindow->animEvent.Clear();
 }
 
 
@@ -90,7 +98,14 @@ void AadvGameGameModeBase::NextPage(int page)
 	else
 	{
 		// 台本が最終行まで行ったのでエンディングに遷移
-		UGameplayStatics::OpenLevel(GetWorld(), FName("ending"));
+
+		// フェードアウトしてからエンディングに遷移するように関数をバインドさせる
+		messageWindow->animEvent.BindDynamic(this, &AadvGameGameModeBase::ChangeLevel);
+		messageWindow->BindToAnimationFinished(messageWindow->fadeOut, messageWindow->animEvent);
+
+		// フェードイン→Input設定
+		messageWindow->PlayAnimation(messageWindow->fadeOut);
+
 	}
 }
 
@@ -100,4 +115,14 @@ void AadvGameGameModeBase::WaitScript()
 		messageWindow->tText->SetText(FText::FromString(nowText.Left(timerCounter)));
 		timerCounter++;
 	}
+}
+
+// エンディングへ
+void AadvGameGameModeBase::ChangeLevel()
+{
+	// バインド解除
+	messageWindow->animEvent.Clear();
+
+	// 遷移するLevelをLoadする
+	UGameplayStatics::OpenLevel(GetWorld(), FName("ending"));
 }

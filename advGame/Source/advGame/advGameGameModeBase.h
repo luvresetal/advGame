@@ -33,9 +33,13 @@ class ADVGAME_API AadvGameGameModeBase : public AGameModeBase
 	// 
 	void WaitScript();
 
+	// エンディングへ
+	UFUNCTION(BlueprintCallable)
+	void ChangeLevel();
 
 protected:
 	// Input設定
+	UFUNCTION(BlueprintCallable)
 	void SetupInput();
 
 	UPROPERTY(EditAnywhere, Category = "Class Types")
