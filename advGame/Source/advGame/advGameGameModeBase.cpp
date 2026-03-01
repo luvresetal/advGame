@@ -43,10 +43,10 @@ void AadvGameGameModeBase::SetupPlay()
 	}
 	// フェードインのあとにゲームが始まるようにアニメーションを関数をバインドさせる
 	messageWindow->animEvent.BindDynamic(this, &AadvGameGameModeBase::SetupInput);
-	messageWindow->BindToAnimationFinished(messageWindow->fadeIn, messageWindow->animEvent);
+	messageWindow->BindToAnimationFinished(messageWindow->fade, messageWindow->animEvent);
 
 	// フェードイン→Input設定
-	messageWindow->PlayAnimation(messageWindow->fadeIn);
+	messageWindow->PlayAnimation(messageWindow->fade);
 
 	// フェードイン再生したらバインド解除しておく
 	messageWindow->animEvent.Clear();
@@ -101,10 +101,10 @@ void AadvGameGameModeBase::NextPage(int page)
 
 		// フェードアウトしてからエンディングに遷移するように関数をバインドさせる
 		messageWindow->animEvent.BindDynamic(this, &AadvGameGameModeBase::ChangeLevel);
-		messageWindow->BindToAnimationFinished(messageWindow->fadeOut, messageWindow->animEvent);
+		messageWindow->BindToAnimationFinished(messageWindow->fade, messageWindow->animEvent);
 
 		// フェードイン→Input設定
-		messageWindow->PlayAnimation(messageWindow->fadeOut);
+		messageWindow->PlayAnimationReverse(messageWindow->fade);
 
 	}
 }

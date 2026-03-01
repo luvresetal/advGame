@@ -26,7 +26,7 @@ void AgmbEnding::BeginPlay()
 	// 左クリック
 	InputComponent->BindKey(EKeys::LeftMouseButton, IE_Pressed, this, &AgmbEnding::PressButton);
 
-	wEnding->PlayAnimation(wEnding->fadeIn);
+	wEnding->PlayAnimation(wEnding->fade);
 }
 
 void AgmbEnding::PressButton()
@@ -34,10 +34,10 @@ void AgmbEnding::PressButton()
 	// 左クリックでタイトルのレベルへ移動
 	// フェードアウトのアニメーションとレベル移動の関数をバインド
 	wEnding->finAnim.BindDynamic(this, &AgmbEnding::ChangeLevel);
-	wEnding->BindToAnimationFinished(wEnding->fadeOut, wEnding->finAnim);
+	wEnding->BindToAnimationFinished(wEnding->fade, wEnding->finAnim);
 
 	// アニメーション実行
-	wEnding->PlayAnimation(wEnding->fadeOut);
+	wEnding->PlayAnimationReverse(wEnding->fade);
 
 }
 

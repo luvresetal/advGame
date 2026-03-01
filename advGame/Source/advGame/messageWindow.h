@@ -25,9 +25,7 @@ public:
 	class UImage* iBg;
 
 	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	class UWidgetAnimation* fadeIn = nullptr;
-	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	class UWidgetAnimation* fadeOut = nullptr;
+	class UWidgetAnimation* fade = nullptr;
 
 	// ÉfÉäÉQÅ[Ég
 	FWidgetAnimationDynamicEvent animEvent;

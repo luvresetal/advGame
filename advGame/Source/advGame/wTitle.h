@@ -16,10 +16,7 @@ class ADVGAME_API UwTitle : public UUserWidget
 
 public:
 	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	class UWidgetAnimation* fadeIn = nullptr;
-
-	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	class UWidgetAnimation* fadeOut = nullptr;
+	class UWidgetAnimation* fade = nullptr;
 
 	// フェードアウト後にレベル移動するための処理
 	// デリゲート
