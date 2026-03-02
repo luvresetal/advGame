@@ -39,7 +39,6 @@ void AadvGameGameModeBase::SetupPlay()
 			messageWindow->AddToViewport();
 
 		}
-
 	}
 	// フェードインのあとにゲームが始まるようにアニメーションを関数をバインドさせる
 	messageWindow->animEvent.BindDynamic(this, &AadvGameGameModeBase::SetupInput);
@@ -66,9 +65,13 @@ void AadvGameGameModeBase::SetupInput()
 // キー入力
 void AadvGameGameModeBase::PressButton()
 {
-	scriptCounter++;
-	timerCounter = 0;
-	NextPage(scriptCounter);
+	// アニメーション再生中は入力を受け付けない
+	if (!(messageWindow->IsPlayingAnimation()))
+	{
+		scriptCounter++;
+		timerCounter = 0;
+		NextPage(scriptCounter);
+	}
 }
 
 // ページめくり
@@ -88,7 +91,6 @@ void AadvGameGameModeBase::NextPage(int page)
 			//printf(scriptData[scriptKey[sBg]][page]);
 			messageWindow->iBg->SetBrushFromTexture(charaData[scriptData[scriptKey[sBg]][page]]);
 		}
-
 
 		//UE_LOG(LogTemp, Log, TEXT("%s"), *scriptData[scriptKey[sText]][page].Left(10));
 		nowText = scriptData[scriptKey[sText]][page];

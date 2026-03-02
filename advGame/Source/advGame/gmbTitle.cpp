@@ -31,13 +31,17 @@ void AgmbTitle::BeginPlay()
 
 void AgmbTitle::PressButton()
 {
-	// 左クリックで本編のレベルへ移動
-	// フェードアウトのアニメーションとレベル移動の関数をバインド
-	wTitle->finAnim.BindDynamic(this, &AgmbTitle::ChangeLevel);
-	wTitle->BindToAnimationFinished(wTitle->fade, wTitle->finAnim);
-	
-	// アニメーション実行
-	wTitle->PlayAnimationReverse(wTitle->fade);
+	// アニメーション再生中は入力を受け付けない
+	if (!(wTitle->IsPlayingAnimation()))
+	{
+		// 左クリックで本編のレベルへ移動
+		// フェードアウトのアニメーションとレベル移動の関数をバインド
+		wTitle->finAnim.BindDynamic(this, &AgmbTitle::ChangeLevel);
+		wTitle->BindToAnimationFinished(wTitle->fade, wTitle->finAnim);
+
+		// アニメーション実行
+		wTitle->PlayAnimationReverse(wTitle->fade);
+	}
 }
 
 void AgmbTitle::ChangeLevel()

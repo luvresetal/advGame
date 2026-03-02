@@ -31,14 +31,17 @@ void AgmbEnding::BeginPlay()
 
 void AgmbEnding::PressButton()
 {
-	// 左クリックでタイトルのレベルへ移動
-	// フェードアウトのアニメーションとレベル移動の関数をバインド
-	wEnding->finAnim.BindDynamic(this, &AgmbEnding::ChangeLevel);
-	wEnding->BindToAnimationFinished(wEnding->fade, wEnding->finAnim);
+	// アニメーション再生中は入力を受け付けない
+	if (!(wEnding->IsPlayingAnimation()))
+	{
+		// 左クリックでタイトルのレベルへ移動
+		// フェードアウトのアニメーションとレベル移動の関数をバインド
+		wEnding->finAnim.BindDynamic(this, &AgmbEnding::ChangeLevel);
+		wEnding->BindToAnimationFinished(wEnding->fade, wEnding->finAnim);
 
-	// アニメーション実行
-	wEnding->PlayAnimationReverse(wEnding->fade);
-
+		// アニメーション実行
+		wEnding->PlayAnimationReverse(wEnding->fade);
+	}
 }
 
 void AgmbEnding::ChangeLevel()
