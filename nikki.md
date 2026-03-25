@@ -13,6 +13,8 @@ TwitterID:@luvresetal
 📰キャラクターがアイテムを拾う機能を実装しよう(3)効果音を付ける [UE5でC++実践編 #4-19]  
 http://zenn.dev/daichi_gamedev/books/unreal-engine-cplusplus/viewer/basic-pickupitem-3  
 こないだのリンクのやり方はできたけど、自分のやりたいこととは違う気がするので別のやり方を探している。  
+そういえば、UEってmp3は使えないっぽい。公式だと使えるみたいなこと書いてるの見た気がするけれど。  
+wavを使ったほうが無難そう。  
   
 2026年3月14日  
 次はサウンド（BGM、効果音）の再生に取り掛かろうと思う。  
