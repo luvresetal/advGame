@@ -9,7 +9,7 @@
 TwitterID:@luvresetal  
   
 2026年3月25日  
-調べたことだけ。 
+調べたことだけ。   
 📰キャラクターがアイテムを拾う機能を実装しよう(3)効果音を付ける [UE5でC++実践編 #4-19]  
 http://zenn.dev/daichi_gamedev/books/unreal-engine-cplusplus/viewer/basic-pickupitem-3  
 こないだのリンクのやり方はできたけど、自分のやりたいこととは違う気がするので別のやり方を探している。  
