@@ -12,7 +12,7 @@ TwitterID:@luvresetal
 Googleで「ue アクタ サウンド ボリューム c++」って検索かけるとコードが生成されてしまう・・・・。  
 ぼちぼちAIも導入していかないとだなぁ。  
 まるまる使ってよくわからないままになってもよくないので、重要そうなことを調べてみる。  
-UE4 サウンドデータ再生とAudioComponentについて　　
+UE4 サウンドデータ再生とAudioComponentについて  
 https://qiita.com/unknown_ds/items/0d230f5472cf9a1cee57  
 生成したコードによるとAudioComponentを使っているので調べてみた。  
   
